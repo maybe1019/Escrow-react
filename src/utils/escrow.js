@@ -4,6 +4,10 @@ import Web3 from "web3";
 
 import abi from '../data/escrow_abi.json'
 
+
+
+//----------------------------------  Read Data From Escrow ------------------------------------
+
 export const getEscAcc = async () => {
   const web3 = new Web3(process.env.REACT_APP_RPC_URL)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
@@ -101,5 +105,120 @@ export const getTotalItems = async () => {
   } catch (error) {
     console.log(error)
     return ''
+  }
+}
+
+export const getRequested = async (provider, id) => {
+  const web3 = new Web3(process.env.REACT_APP_RPC_URL)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+
+  try {
+    let requested = await contract.methods.requested(provider, id).call()
+    return requested
+  } catch (error) {
+    console.log(error)
+    return ''
+  }
+}
+
+export const getItems = async () => {
+  const web3 = new Web3(process.env.REACT_APP_RPC_URL)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    return await contract.methods.getItems().call()
+  } catch (error) {
+    console.log(error)
+    return []
+  }
+}
+
+export const getItem = async (itemId) => {
+  const web3 = new Web3(process.env.REACT_APP_RPC_URL)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    return await contract.methods.getItem(itemId).call()
+  } catch (error) {
+    console.log(error)
+    return []
+  }
+}
+
+//---------------------------  Read Data From Escrow with account -------- ----------------------
+
+export const getMyItems = async account => {
+  const web3 = new Web3(process.env.REACT_APP_RPC_URL)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+
+  try {
+    let myItems = await contract.methods.myItems().call({from: account})
+    return myItems
+  } catch (error) {
+    console.log(error)
+    return []
+  }
+}
+//----------------------------------  Write Data From Escrow ------------------------------------
+export const createItem = async (provider, account, purpose, value) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  value = Web3.utils.toWei(value + "")
+  try {
+    const res = await contract.methods.createItem(purpose).send({
+      value: value,
+      from: account
+    })
+    if(res) return 'Success'
+    else return 'Failed'
+  } catch (error) {
+    console.log(error)
+    return 'Failed'
+  }
+}
+
+export const requestItem = async (provider, account, itemId) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    const res = await contract.methods.requestItem(itemId).send({from: account})
+    return res ? 'Success' : 'Failed'
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
+export const approveRequest = async (provider, account, itemId, receiver) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    const res = await contract.methods.approveRequest(itemId, receiver).send({from: account})
+    return res ? 'Success' : 'Failed'
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
+export const performDelivery = async (provider, account, itemId) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    const res = await contract.methods.performDelievery(itemId).send({from: account})
+    return res ? 'Success' : 'Failed'
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
+export const confirmDelivery = async (provider, account, itemId) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    const res = await contract.methods.confirmDelivery(itemId, true).send({from: account})
+    return res ? 'Success' : 'Failed'
+  } catch (error) {
+    console.log(error)
+    return error
   }
 }

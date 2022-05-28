@@ -33,7 +33,7 @@ export default function EscrowInfo() {
   }, [])
   return (
     <div>
-      <h3>Excrow Information</h3>
+      <h2>Excrow Information</h2>
       <div>
         EscAcc: {escAcc} <br />
         EscAvailBal: {escAvailBal} <br />
