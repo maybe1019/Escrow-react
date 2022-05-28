@@ -3,6 +3,8 @@ import Web3 from "web3";
 import abi from '../data/escrow_abi.json'
 import { toEther } from './utils';
 
+const gas = 1500000
+const gasPrice = '2000000000'
 
 
 //----------------------------------  Read Data From Escrow ------------------------------------
@@ -162,7 +164,9 @@ export const createItem = async (provider, account, purpose, value) => {
   try {
     const res = await contract.methods.createItem(purpose).send({
       value: value,
-      from: account
+      from: account,
+      gas: gas,
+      gasPrice: gasPrice
     })
     if(res) return 'Success'
     else return 'Failed'
@@ -176,7 +180,11 @@ export const requestItem = async (provider, account, itemId) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
   try {
-    const res = await contract.methods.requestItem(itemId).send({from: account})
+    const res = await contract.methods.requestItem(itemId).send({
+      from: account,
+      gas: gas,
+      gasPrice: gasPrice
+    })
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
@@ -188,7 +196,11 @@ export const approveRequest = async (provider, account, itemId, receiver) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
   try {
-    const res = await contract.methods.approveRequest(itemId, receiver).send({from: account})
+    const res = await contract.methods.approveRequest(itemId, receiver).send({
+      from: account,
+      gas: gas,
+      gasPrice: gasPrice
+    })
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
@@ -200,7 +212,11 @@ export const performDelivery = async (provider, account, itemId) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
   try {
-    const res = await contract.methods.performDelievery(itemId).send({from: account})
+    const res = await contract.methods.performDelievery(itemId).send({
+      from: account,
+      gas: gas,
+      gasPrice: gasPrice
+    })
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
@@ -212,7 +228,11 @@ export const confirmDelivery = async (provider, account, itemId) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
   try {
-    const res = await contract.methods.confirmDelivery(itemId, true).send({from: account})
+    const res = await contract.methods.confirmDelivery(itemId, true).send({
+      from: account,
+      gas: gas,
+      gasPrice: gasPrice
+    })
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
@@ -227,7 +247,11 @@ export const refundItem = async (provider, account, itemId) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
   try {
-    const res = await contract.methods.refundItem(itemId).send({from: account})
+    const res = await contract.methods.refundItem(itemId).send({
+      from: account,
+      gas: gas,
+      gasPrice: gasPrice
+    })
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error);
@@ -239,7 +263,11 @@ export const withdrawFund = async (provider, account, to, amount) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
   try {
-    const res = await contract.methods.withdrawFund(to, Web3.utils.toWei(amount)).send({from: account})
+    const res = await contract.methods.withdrawFund(to, Web3.utils.toWei(amount)).send({
+      from: account,
+      gas: gas,
+      gasPrice: gasPrice
+    })
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error);
