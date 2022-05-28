@@ -1,8 +1,7 @@
-/* global BigInt */
-
 import Web3 from "web3";
 
 import abi from '../data/escrow_abi.json'
+import { toEther } from './utils';
 
 
 
@@ -27,8 +26,7 @@ export const getEscAvailBal = async () => {
 
   try {
     let escAvailBal = await contract.methods.escAvailBal().call()
-    escAvailBal = BigInt(escAvailBal) / BigInt(Math.pow(10, 15) + '')
-    escAvailBal = parseInt(escAvailBal.toString()) / 1000
+    escAvailBal = toEther(escAvailBal)
     
     return escAvailBal
   } catch (error) {
@@ -43,8 +41,7 @@ export const getEscBal = async () => {
 
   try {
     let escBal = await contract.methods.escBal().call()
-    escBal = BigInt(escBal) / BigInt(Math.pow(10, 15) + '')
-    escBal = parseInt(escBal.toString()) / 1000
+    escBal = toEther(escBal)
     return escBal
   } catch (error) {
     console.log(error)
@@ -219,6 +216,33 @@ export const confirmDelivery = async (provider, account, itemId) => {
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
+    return error
+  }
+}
+
+
+//----------------------------------  Owner Functions ------------------------------------
+
+export const refundItem = async (provider, account, itemId) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    const res = await contract.methods.refundItem(itemId).send({from: account})
+    return res ? 'Success' : 'Failed'
+  } catch (error) {
+    console.log(error);
+    return error
+  }
+}
+
+export const withdrawFund = async (provider, account, to, amount) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
+  try {
+    const res = await contract.methods.withdrawFund(to, Web3.utils.toWei(amount)).send({from: account})
+    return res ? 'Success' : 'Failed'
+  } catch (error) {
+    console.log(error);
     return error
   }
 }
