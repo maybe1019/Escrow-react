@@ -28,7 +28,7 @@ export default function Header() {
         </button>
       </header>
       {
-        chainId !== 80001 ?
+        chainId !== 137 ?
           <p style={{color: 'red'}}>Wrong network. Please change your network.</p>
         : ''
       }
