@@ -224,11 +224,11 @@ export const performDelivery = async (provider, account, itemId) => {
   }
 }
 
-export const confirmDelivery = async (provider, account, itemId) => {
+export const confirmDelivery = async (provider, account, itemId, flag) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(abi, process.env.REACT_APP_CONTRACT_ADDRESS)
   try {
-    const res = await contract.methods.confirmDelivery(itemId, true).send({
+    const res = await contract.methods.confirmDelivery(itemId, flag).send({
       from: account,
       gas: gas,
       gasPrice: gasPrice

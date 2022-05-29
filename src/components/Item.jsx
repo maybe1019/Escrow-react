@@ -41,8 +41,8 @@ export default function Item({ item }) {
     window.alert(res)
   }
 
-  const handleConfirmDelivery = async () => {
-    const res = await confirmDelivery(library.provider, account, parseInt(item.itemId))
+  const handleConfirmDelivery = async (flag) => {
+    const res = await confirmDelivery(library.provider, account, parseInt(item.itemId), flag)
     window.alert(res)
   }
 
@@ -67,7 +67,8 @@ export default function Item({ item }) {
         ) : item.status === '2' && item.provided ? (
           <div>
             <br />
-            <button onClick={handleConfirmDelivery}>Confirm Delivery</button>
+            <button onClick={()=>handleConfirmDelivery(true)}>Confirm Delivery</button>
+            <button onClick={()=>handleConfirmDelivery(false)}>Dispute</button>
           </div>
         ) : ''
       }
