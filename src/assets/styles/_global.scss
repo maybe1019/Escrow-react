@@ -1,0 +1,16 @@
+:root {
+  --theme-primary-color: #fca120;
+  --theme-secondary-color: #001d4a;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.25s ease-in-out;
+
+  font-family: Jost;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

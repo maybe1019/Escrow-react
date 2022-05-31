@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Escrow | Polygon",
+  "name": "Escrow system running on Polygon network.",
   "icons": [
     {
       "src": "favicon.ico",

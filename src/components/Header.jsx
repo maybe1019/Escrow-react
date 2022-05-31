@@ -1,37 +1,71 @@
+import { Container } from '@mui/material'
 import { useEthers, shortenAddress } from '@usedapp/core'
-import React from 'react'
+import React, { useState } from 'react'
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Web3 from 'web3'
+
+import networks from '../data/networks.json'
 
 export default function Header() {
 
-  const { account, chainId, deactivate, activateBrowserWallet } = useEthers()
+  const {
+    account,
+    chainId,
+    library,
+    deactivate,
+    activateBrowserWallet
+  } = useEthers()
 
-  const handleConnect = () => {
+  const [loading, setLoading] = useState(false)
+
+  const handleConnect = async () => {
+    setLoading(true)
     if(!account) {
-      activateBrowserWallet()
+      await activateBrowserWallet()
     }
-    else {
+    else if(chainId === 80001) {
       deactivate()
     }
+    else {
+      let newChainId = process.env.REACT_APP_CHAIN_ID
+      try {
+        await library.provider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: Web3.utils.toHex(newChainId) }]
+        });
+      } catch (switchError) {
+        if (switchError.code === 4902) {
+          window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [networks[newChainId]]
+          })
+          .catch((error) => {
+            console.log(error.code)
+          })
+        }
+      }
+    }
+    setLoading(false)
   }
 
   return (
-    <div>
-      <header style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '4px 20px'
-      }}>
+    <header>
+      <Container fixed id="header">
         <h1>Escrow</h1>
-        <button onClick={handleConnect}>
-          { account ? shortenAddress(account) : 'Connect Wallet' }
-        </button>
-      </header>
-      {
-        chainId !== 80001 ?
-          <p style={{color: 'red'}}>Wrong network. Please change your network.</p>
-        : ''
-      }
-    </div>
+        <LoadingButton
+          onClick={handleConnect}
+          endIcon={<AccountBalanceWalletIcon />}
+          loading={loading}
+          loadingPosition="end"
+          variant="contained"
+        >
+          {
+            !account ? "Connect Wallet"
+            : chainId !== 80001 ? "Change Network"
+            : shortenAddress(account) }
+        </LoadingButton>
+      </Container>
+    </header>
   )
 }

@@ -1,7 +1,8 @@
-* {
-  box-sizing: border-box;
-  transition: all 0.25s ease-in-out;
-}
+@import "./fonts";
+@import "./global";
+
+//Components
+@import './components/header.scss';
 
 .container {
   border-radius: 10px;
