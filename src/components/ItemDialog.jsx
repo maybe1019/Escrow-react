@@ -121,13 +121,13 @@ export default function ItemDialog({ handleClose, open, item}) {
           <li>
             <div className='info-name'>Provided</div>
             <div>
-              <Chip color={item.provided ? 'success' : 'warning'} label={item.provided ? 'True' : 'False'} />
+              <Chip color={item.provided ? 'success' : 'error'} label={item.provided ? 'True' : 'False'} />
             </div>
           </li>
           <li>
             <div className='info-name'>Confirmed</div>
             <div>
-              <Chip color={item.confirmed ? 'success' : 'warning'} label={item.confirmed ? 'True' : 'False'} />
+              <Chip color={item.confirmed ? 'success' : 'error'} label={item.confirmed ? 'True' : 'False'} />
             </div>
           </li>
         </ul>

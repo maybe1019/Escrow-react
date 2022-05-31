@@ -19,8 +19,7 @@ export default function MyData() {
           items.push(item)
         }
       });
-      setMyItems(items)
-      console.log(items)
+      setMyItems(items.reverse())
     }
     
     func()
