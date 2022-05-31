@@ -23,7 +23,7 @@ function App() {
   return (
     <SnackbarProvider maxSnack={4}>
       <ThemeProvider theme={theme} >
-        <ScopedCssBaseline>
+        <ScopedCssBaseline style={{backgroundColor: "rgba(0, 0, 0, 0)"}}>
           <MainLayout>
             <Escrow />
           </MainLayout>

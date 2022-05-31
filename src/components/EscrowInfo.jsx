@@ -1,3 +1,4 @@
+import { Container } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
 import {
@@ -33,16 +34,39 @@ export default function EscrowInfo() {
   }, [])
   return (
     <div>
-      <h2>Excrow Information</h2>
-      <div>
-        EscAcc: {escAcc} <br />
-        EscAvailBal: {escAvailBal} <br />
-        EscBal: {escBal} <br />
-        EscFee: {escFee}% <br />
-        TotalConfirmed: {totalConfirmed} <br />
-        TotalDisputed: {totalDisputed} <br />
-        TotalItems: {totalItems}
-      </div>
+      <Container fixed id="escrow-info">
+        <h2>Excrow Information</h2>
+        <ul>
+          <li>
+            <div className='info-name'>EscAcc</div>
+            <div className='info-value'>{escAcc}</div>
+          </li>
+          <li>
+            <div className='info-name'>EscAvailBal</div>
+            <div className='info-value'>{escAvailBal}</div>
+          </li>
+          <li>
+            <div className='info-name'>EscBal</div>
+            <div className='info-value'>{escBal}</div>
+          </li>
+          <li>
+            <div className='info-name'>EscFee</div>
+            <div className='info-value'>{escFee}%</div>
+          </li>
+          <li>
+            <div className='info-name'>TotalConfirmed</div>
+            <div className='info-value'>{totalConfirmed}</div>
+          </li>
+          <li>
+            <div className='info-name'>TotalDisputed</div>
+            <div className='info-value'>{totalDisputed}</div>
+          </li>
+          <li>
+            <div className='info-name'>TotalItems</div>
+            <div className='info-value'>{totalItems}</div>
+          </li>
+        </ul>
+      </Container>
     </div>
   )
 }

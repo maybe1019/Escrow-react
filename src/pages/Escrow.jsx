@@ -18,22 +18,15 @@ export default function Escrow() {
   }, [])
 
   return (
-    <div className='Escrow'>
+    <div id='escrow'>
 
       <EscrowInfo />
-      <div className='line'></div>
 
       {
-        escAcc === account ? 
-          <div>
-            <Ownerpannel />
-            <div className='line'></div>
-          </div>
-        : ''
+        escAcc === account ? <Ownerpannel /> : ''
       }
       
       <UseEscrow />
-      <div className='line'></div>
 
       <MyData />
     </div>

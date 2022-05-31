@@ -1,6 +1,9 @@
 :root {
   --theme-primary-color: #fca120;
   --theme-secondary-color: #001d4a;
+
+  --theme-body-bg-color: #fbfcdd;
+  --theme-border-color: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -13,4 +16,6 @@
 body {
   margin: 0;
   padding: 0;
+
+  background-color: var(--theme-body-bg-color);
 }

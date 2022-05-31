@@ -1,6 +1,14 @@
-#header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 20px;
+header {
+  background-color: var(--theme-secondary-color);
+  
+  #header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 20px;
+
+    h1 {
+      color: var(--theme-body-bg-color);
+    }
+  }
 }
