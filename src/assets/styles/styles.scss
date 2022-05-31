@@ -3,15 +3,13 @@
 
 //Components
 @import './components/header.scss';
+@import './components/footer.scss';
+
 @import './components/escrow_info.scss';
 @import './components/use_escrow.scss';
+@import './components/my_data.scss';
+@import './components/item_dialog.scss';
+@import './components/owner_panel.scss';
 
 // Pages
 @import './pages/escrow.scss';
-
-
-.item {
-  border: 1px dashed gray;
-  padding: 10px;
-  margin: 5px;
-}

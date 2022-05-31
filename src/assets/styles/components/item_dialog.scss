@@ -1,0 +1,89 @@
+.item-modal {
+  width: 90vw;
+  max-width: 580px;
+
+  padding: 20px 20px 30px 20px;
+
+  .modal-title {
+    font-size: 24px;
+    color: var(--theme-primary-color);
+    font-weight: 800;
+    padding: 14px 0 20px 50px;
+
+    position: relative;
+
+    button {
+      border: none;
+      background-color: rgba(0, 0, 0, 0);
+
+      position: absolute;
+      right: 20px;
+      top: 18px;
+
+      color: #888;
+      cursor: pointer;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    background-color: white;
+
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 6px 0;
+
+    li {
+      background-color: white;
+      padding: 10px 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+      .info-name {
+        font-weight: bold;
+        color: black;
+      }
+    }
+  }
+
+  .action-group {
+    padding-top: 20px;
+    
+    .input {
+      display: flex;
+      align-items: center;
+
+      margin-bottom: 14px;
+      
+      div {
+        width: 150px;
+      }
+
+      input {
+        padding: 10px 40px;
+        border: none;
+        outline: none;
+        background-color: rgba(150, 150, 150, 0.1);
+
+        text-align: right;
+
+        font-size: 14px;
+        
+        flex-grow: 1;
+      }
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+  }
+}

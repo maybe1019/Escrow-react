@@ -21,6 +21,7 @@
       text-align: center;
 
       padding: 14px 0 14px 70px;
+      background-color: rgb(240, 248, 255);
     }
 
     li {
@@ -29,6 +30,8 @@
       justify-content: space-between;
 
       padding: 6px 40px;
+
+      background-color: white;
 
       >div:first-child {
         border-right: 1px solid var(--theme-border-color);
@@ -50,16 +53,9 @@
         color: rgba(0, 0, 0, 0.7);
       }
 
-      &.bg-1 {
-        background-color: rgb(240, 248, 255);
-      }
-
-      &.bg-2 {
-        background-color: white;
-      }
-
-      &.bg-3 {
-        background-color: rgb(242, 255, 240);
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 20px;
       }
     }
   }

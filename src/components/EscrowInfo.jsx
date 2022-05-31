@@ -36,7 +36,7 @@ export default function EscrowInfo() {
     <div>
       <Container fixed id="escrow-info">
         <h2>Excrow Information</h2>
-        <ul>
+        <ul className='shadow'>
           <li>
             <div className='info-name'>EscAcc</div>
             <div className='info-value'>{escAcc}</div>

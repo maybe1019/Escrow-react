@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useEthers } from '@usedapp/core';
 import { getItems } from '../utils/escrow';
-import Item from './Item';
+import ItemTable from './ItemTable';
+import { Container } from '@mui/material';
 
 export default function MyData() {
-  const { account } = useEthers()
+  const { account, chainId } = useEthers()
 
   const [myItems, setMyItems] = useState([])
 
@@ -19,6 +20,7 @@ export default function MyData() {
         }
       });
       setMyItems(items)
+      console.log(items)
     }
     
     func()
@@ -26,20 +28,15 @@ export default function MyData() {
 
 
   return (
-    <div>
+    <Container fixed>
       {
-        account ? 
-          <div>
-            <h2>My Data</h2>
-            <div className='container'>
-              <h4>My Items</h4>
-              {
-                myItems.map(item => <Item key={item.itemId} item={item} />)
-              }
-            </div>
+        account && chainId+'' === process.env.REACT_APP_CHAIN_ID ? 
+          <div id="my-items">
+            <h2>My Items</h2>
+            <ItemTable items={myItems} />
           </div>
         : ''
       }
-    </div>
+    </Container>
   )
 }

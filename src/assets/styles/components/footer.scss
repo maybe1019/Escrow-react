@@ -1,0 +1,14 @@
+footer {
+  padding: 30px 0;
+  background-color: var(--theme-secondary-color);
+  color: white;
+
+  #footer {
+    display: flex;
+    justify-content: space-between;
+
+    div:last-child {
+      color: var(--theme-primary-color);
+    }
+  }
+}

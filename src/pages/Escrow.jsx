@@ -3,7 +3,7 @@ import EscrowInfo from '../components/EscrowInfo'
 import MyData from '../components/MyData'
 import UseEscrow from '../components/UseEscrow'
 import { useEthers } from '@usedapp/core';
-import Ownerpannel from '../components/Ownerpannel';
+import Ownerpanel from '../components/Ownerpanel';
 import { getEscAcc } from './../utils/escrow';
 
 export default function Escrow() {
@@ -23,7 +23,7 @@ export default function Escrow() {
       <EscrowInfo />
 
       {
-        escAcc === account ? <Ownerpannel /> : ''
+        escAcc === account ? <Ownerpanel /> : ''
       }
       
       <UseEscrow />

@@ -188,7 +188,7 @@ export const requestItem = async (provider, account, itemId) => {
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
-    return error
+    return 'Failed'
   }
 }
 
@@ -204,7 +204,7 @@ export const approveRequest = async (provider, account, itemId, receiver) => {
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
-    return error
+    return 'Failed'
   }
 }
 
@@ -220,7 +220,7 @@ export const performDelivery = async (provider, account, itemId) => {
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
-    return error
+    return 'Failed'
   }
 }
 
@@ -236,7 +236,7 @@ export const confirmDelivery = async (provider, account, itemId, flag) => {
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error)
-    return error
+    return 'Failed'
   }
 }
 
@@ -255,7 +255,7 @@ export const refundItem = async (provider, account, itemId) => {
     return res ? 'Success' : 'Failed'
   } catch (error) {
     console.log(error);
-    return error
+    return 'Failed'
   }
 }
 
